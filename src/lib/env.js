@@ -1,0 +1,79 @@
+// Environment variable validation
+const requiredEnvVars = ["MONGODB_URI", "NEXTAUTH_SECRET", "AUTH_URL"];
+
+const optionalEnvVars = [
+  "CLOUDINARY_CLOUD_NAME",
+  "CLOUDINARY_API_KEY",
+  "CLOUDINARY_API_SECRET",
+  "RAZORPAY_KEY_ID",
+  "RAZORPAY_KEY_SECRET",
+  "RAZORPAY_WEBHOOK_SECRET",
+  "RAZORPAY_CURRENCY",
+  "GOOGLE_CLIENT_ID",
+  "GOOGLE_CLIENT_SECRETS",
+];
+
+export function validateEnv() {
+  const secret = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET;
+  const url = process.env.AUTH_URL || process.env.NEXTAUTH_URL;
+  const mongodb = process.env.MONGODB_URI;
+
+  const missing = [];
+  if (!mongodb) missing.push("MONGODB_URI");
+  if (!secret) missing.push("AUTH_SECRET or NEXTAUTH_SECRET");
+  if (!url) missing.push("AUTH_URL or NEXTAUTH_URL");
+
+  if (missing.length > 0) {
+    throw new Error(
+      `Missing required environment variables: ${missing.join(", ")}`,
+    );
+  }
+
+  return {
+    mongodb: process.env.MONGODB_URI,
+    nextAuth: {
+      secret: secret,
+      url: url,
+    },
+    cloudinary: {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME || process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+      apiKey: process.env.CLOUDINARY_API_KEY,
+      apiSecret: process.env.CLOUDINARY_API_SECRET,
+    },
+    razorpay: {
+      keyId: process.env.RAZORPAY_KEY_ID,
+      keySecret: process.env.RAZORPAY_KEY_SECRET,
+      webhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET,
+      currency: process.env.RAZORPAY_CURRENCY || "INR",
+    },
+  };
+}
+
+// Get environment variables with fallbacks
+export function getEnv() {
+  return {
+    nodeEnv: process.env.NODE_ENV || "development",
+    mongodb: process.env.MONGODB_URI,
+    nextAuth: {
+      secret: process.env.AUTH_SECRET,
+      url: process.env.AUTH_URL || "http://localhost:3000",
+    },
+
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRETS,
+    },
+    cloudinary: {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+      apiKey: process.env.CLOUDINARY_API_KEY,
+      apiSecret: process.env.CLOUDINARY_API_SECRET,
+    },
+
+    razorpay: {
+      keyId: process.env.RAZORPAY_KEY_ID,
+      keySecret: process.env.RAZORPAY_KEY_SECRET,
+      webhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET,
+      currency: process.env.RAZORPAY_CURRENCY || "INR",
+    },
+  };
+}

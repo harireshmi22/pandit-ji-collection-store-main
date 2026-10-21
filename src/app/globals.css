@@ -1,0 +1,588 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  --color-primary: #111111;
+  --color-secondary: #555555;
+  --color-accent: #000000;
+  --color-surface: #fafafa;
+  --color-border: #e5e5e5;
+  --color-muted: #888888;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --bg-base: #fcfcfb;
+  --bg-soft: #f4f7ff;
+  --bg-warm: #fff9ef;
+  --bg-cool: #eefbff;
+  --bg-line: rgba(17, 24, 39, 0.03);
+  --electric-blue: #2962ff;
+  --royal-indigo: #4f46e5;
+  --aqua-mint: #06b6d4;
+  --sun-amber: #f59e0b;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent font loading CLS */
+.font-fallback {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", sans-serif;
+}
+
+/* Reserve space for font loading */
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    sans-serif;
+}
+
+/* Prevent text jumps during font loading */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div {
+  font-family: inherit;
+}
+
+/* Prevent CLS by reserving space for images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Aspect ratio containers to prevent CLS */
+.aspect-3-4 {
+  aspect-ratio: 3 / 4;
+}
+
+.aspect-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.aspect-4-5 {
+  aspect-ratio: 4 / 5;
+}
+
+/* Prevent layout shifts during loading */
+.image-container {
+  contain: layout;
+  overflow: hidden;
+}
+
+/* Optimize image loading to reduce CLS */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 400px 500px;
+}
+
+/* Reduce CLS by preventing text jumps */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+/* Optimize animations to reduce CLS */
+.animate-fade-up {
+  animation: fadeUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Prevent layout shifts in grid layouts */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Ensure consistent spacing */
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+
+.aspect-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+/* Prevent layout shifts from dynamic content */
+.skeleton {
+  contain: layout;
+  overflow: hidden;
+}
+
+/* Comprehensive CLS prevention */
+[data-dynamic] {
+  contain: layout;
+}
+
+/* Reserve space for lazy loaded content */
+[loading="lazy"] {
+  contain-intrinsic-size: 400px 500px;
+}
+
+/* Prevent layout shifts in grid layouts */
+.grid>* {
+  contain: layout;
+}
+
+/* Fix aspect ratio consistency */
+.aspect-3-4,
+.aspect-4-5,
+.aspect-4-3 {
+  contain: layout;
+}
+
+/* Prevent text jumps */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  contain: layout style;
+}
+
+/* Optimize images for CLS */
+img {
+  contain: layout;
+}
+
+/* Prevent layout shifts in flex containers */
+.flex>* {
+  contain: layout;
+}
+
+/* Prevent layout shifts in buttons */
+button,
+a {
+  contain: layout;
+}
+
+/* Skeleton loading animation */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+::selection {
+  background: #111;
+  color: #fff;
+}
+
+input:focus:not(.no-global-focus),
+textarea:focus:not(.no-global-focus),
+select:focus:not(.no-global-focus) {
+  outline: none;
+  border-color: #111 !important;
+  box-shadow: 0 0 0 1px #111;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s var(--ease-out) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease both;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* Hero card animations */
+.hero-card-entrance {
+  animation: heroCardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroCardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-icon-float {
+  animation: heroIconFloat 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes heroIconFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.hero-orb-drift {
+  animation: orbDrift 8s ease-in-out infinite;
+}
+
+@keyframes orbDrift {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(20px, -20px);
+  }
+}
+
+.hero-orb-drift-soft {
+  animation: orbDriftSoft 10s ease-in-out infinite;
+}
+
+@keyframes orbDriftSoft {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-24px, 16px);
+  }
+}
+
+.cancel-pulse {
+  animation: cancelPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes cancelPulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.cancel-pulse-soft {
+  animation: cancelPulseSoft 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes cancelPulseSoft {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.cancel-bar-glow {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+}
+
+.cancel-stripes {
+  background-image: repeating-linear-gradient(45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.1) 10px,
+      rgba(255, 255, 255, 0.1) 20px);
+  animation: stripeAnimation 2s linear infinite;
+}
+
+@keyframes stripeAnimation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 20px 20px;
+  }
+}
+
+.timeline-sheen {
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
+  animation: sheen 2s infinite;
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 223 100% 58%;
+  --primary-foreground: 0 0% 100%;
+  --primary-glow: 223 96% 67%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 190 95% 44%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 223 100% 58%;
+  --gradient-primary: linear-gradient(135deg,
+      hsl(223 100% 58%),
+      hsl(190 95% 44%));
+  --gradient-surface: linear-gradient(180deg, #ffffff, #f8fafc);
+  --shadow-glow: 0 20px 40px -12px hsl(223 100% 58% / 0.27);
+  --shadow-subtle: 0 2px 8px -2px hsl(0 0% 0% / 0.1);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 0.5rem;
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: #111827;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 8% 12%, rgba(41, 98, 255, 0.14), transparent 34%),
+    radial-gradient(circle at 90% 14%,
+      rgba(79, 70, 229, 0.12),
+      transparent 32%),
+    radial-gradient(circle at 52% 88%, rgba(6, 182, 212, 0.1), transparent 36%),
+    radial-gradient(circle at 14% 86%,
+      rgba(245, 158, 11, 0.09),
+      transparent 26%),
+    linear-gradient(180deg,
+      var(--bg-base) 0%,
+      var(--bg-soft) 58%,
+      var(--bg-warm) 100%),
+    linear-gradient(90deg, var(--bg-line) 1px, transparent 1px),
+    linear-gradient(0deg, var(--bg-line) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    auto,
+    auto,
+    auto,
+    28px 28px,
+    28px 28px;
+  background-position: center, center, center, center, center, center;
+  opacity: 0.9;
+  z-index: -1;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 263 70% 56%;
+  --primary-foreground: 0 0% 100%;
+  --primary-glow: 263 70% 70%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 195 100% 59%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 263 70% 56%;
+  --gradient-primary: linear-gradient(135deg,
+      hsl(263 70% 56%),
+      hsl(195 100% 59%));
+  --gradient-surface: linear-gradient(180deg,
+      hsl(222.2 84% 4.9%),
+      hsl(217.2 32.6% 17.5%));
+  --shadow-glow: 0 20px 40px -12px hsl(263 70% 56% / 0.4);
+  --shadow-subtle: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
+  --sidebar-background: 240 5.9% 10%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 224.3 76.3% 48%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
